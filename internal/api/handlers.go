@@ -2,6 +2,8 @@ package api
 
 import "github.com/gofiber/fiber/v2"
 
+// TODO: Create logic
+
 // api/projects/
 func (s *RestServer) fetchAll(c *fiber.Ctx) error {
 	return nil

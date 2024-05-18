@@ -2,6 +2,8 @@ package services
 
 import "gerello/internal/repositories"
 
+// TODO: Implement methods from ProjectService interface
+
 type ProjectServiceImpl struct {
 	repo repositories.ProjectRepository
 }
