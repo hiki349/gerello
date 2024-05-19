@@ -1,6 +1,6 @@
 # Gerello
 
-## Installation
+## Installation Server
 - move from .env.example to .env
 ```sh
 mv .env.example .env
