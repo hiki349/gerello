@@ -1,20 +1,22 @@
 package api
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"net/http"
+)
 
-func (s *RestServer) createProjectsRouter(projectsAPI fiber.Router) {
+func (s *RestServer) createProjectsRouter(mux *http.ServeMux) {
 	// api/projects/
-	projectsAPI.Get("/", s.fetchAll)
+	mux.HandleFunc("GET projects/", s.fetchAll)
 
 	// api/projects/:id
-	projectsAPI.Get("/:id", s.fetchByID)
+	mux.HandleFunc("GET projects/{id}", s.fetchByID)
 
 	// api/projects/:id
-	projectsAPI.Put("/:id", s.Update)
+	mux.HandleFunc("PUT projects/{id}", s.update)
 
 	// api/projects/:id
-	projectsAPI.Delete("/:id", s.Delete)
+	mux.HandleFunc("DELETE projects/{id}", s.delete)
 
 	// api/projects/
-	projectsAPI.Post("/", s.Create)
+	mux.HandleFunc("POST projects/", s.create)
 }

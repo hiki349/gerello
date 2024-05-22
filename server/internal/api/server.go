@@ -2,8 +2,7 @@ package api
 
 import (
 	"log"
-
-	"github.com/gofiber/fiber/v2"
+	"net/http"
 
 	"gerello/internal/domain/services"
 )
@@ -23,12 +22,8 @@ func New(services services.ProjectService) *RestServer {
 }
 
 func (s *RestServer) Start() {
-	app := fiber.New()
-	api := app.Group("/api")
+	mux := http.NewServeMux()
+	s.createProjectsRouter(mux)
 
-	projectsAPI := api.Group("/projects")
-
-	s.createProjectsRouter(projectsAPI)
-
-	log.Fatal(app.Listen(":7070"))
+	log.Fatal(http.ListenAndServe(":7070", mux))
 }
