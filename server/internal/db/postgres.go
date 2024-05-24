@@ -15,7 +15,7 @@ type PG struct {
 func New(ctx context.Context, connStr string, maxAttempts int) (*PG, error) {
 	var pool *pgxpool.Pool
 	var err error
-log.Println(maxAttempts)
+
 	for maxAttempts > 0 {
 		ctx, cancel := context.WithTimeout(ctx, time.Second*5)
 		defer cancel()
@@ -29,7 +29,6 @@ log.Println(maxAttempts)
 
 		break
 	}
-	log.Println(maxAttempts)
 
 	return &PG{
 		Pool: pool,
