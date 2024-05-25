@@ -4,8 +4,8 @@ import (
 	"context"
 	"log"
 
-	"gerello/internal/config"
-	"gerello/internal/db"
+	"gerello/config"
+	"gerello/internal/adapters/postgres"
 )
 
 // TODO: assembly the Project
@@ -19,7 +19,7 @@ func main() {
 		return
 	}
 
-	pg, err := db.New(ctx, config.ConnStrPostgres, config.MaxAttempts)
+	pg, err := postgres.New(ctx, config.ConnStrPostgres, config.MaxAttempts)
 	if err != nil {
 		log.Printf("%v", err)
 		return
