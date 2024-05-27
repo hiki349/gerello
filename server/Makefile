@@ -4,10 +4,10 @@ define create_migration
 	$(eval FILE_NAME := $(DATE)_$(name))
 	$(eval EXT := ".sql")
 
-	@echo "" > migrations/$(FILE_NAME)up$(EXT)
-	@echo "created $(FILE_NAME)up$(EXT)"
-	@echo "" > migrations/$(FILE_NAME)down$(EXT)
-	@echo "created $(FILE_NAME)down$(EXT)"
+	@echo "" > migrations/$(FILE_NAME)_up$(EXT)
+	@echo "created $(FILE_NAME)_up$(EXT)"
+	@echo "" > migrations/$(FILE_NAME)_down$(EXT)
+	@echo "created $(FILE_NAME)_down$(EXT)"
 endef
 
 run:
