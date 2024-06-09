@@ -7,6 +7,8 @@ import (
 	"os"
 	"strings"
 
+	_ "github.com/lib/pq"
+
 	"gerello/config"
 )
 

@@ -9,8 +9,6 @@ import (
 	"gerello/internal/ports/db"
 )
 
-// TODO: Implement methods from ProjectService interface
-
 type ProjectService struct {
 	repo db.ProjectRepository
 }
@@ -22,21 +20,56 @@ func New(repo db.ProjectRepository) *ProjectService {
 }
 
 func (s *ProjectService) Add(ctx context.Context, input *project.ProjectInput) (*project.Project, error) {
-	return nil, nil
+	id, err := s.repo.Add(ctx, input)
+	if err != nil {
+		return nil, err
+	}
+
+	project, err := s.repo.GetByID(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+
+	return project, nil
 }
 
 func (s *ProjectService) Delete(ctx context.Context, id uuid.UUID) (bool, error) {
-	return false, nil
+	ok, err := s.repo.Delete(ctx, id)
+	if err != nil {
+		return false, err
+	}
+
+	return ok, nil
 }
 
 func (s *ProjectService) Update(ctx context.Context, id uuid.UUID, input *project.ProjectInput) (*project.Project, error) {
-	return nil, nil
+	id, err := s.repo.Update(ctx, input, id)
+	if err != nil {
+		return nil, err
+	}
+
+	project, err := s.repo.GetByID(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+
+	return project, nil
 }
 
 func (s *ProjectService) FetchAll(ctx context.Context) ([]project.Project, error) {
-	return nil, nil
+	projects, err := s.repo.GetAll(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	return projects, nil
 }
 
 func (s *ProjectService) FetchByID(ctx context.Context, id uuid.UUID) (*project.Project, error) {
-	return nil, nil
+	project, err := s.repo.GetByID(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+
+	return project, nil
 }

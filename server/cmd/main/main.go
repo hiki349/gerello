@@ -5,10 +5,11 @@ import (
 	"log"
 
 	"gerello/config"
-	"gerello/internal/adapters/postgres"
+	"gerello/internal/adapters/primary/api"
+	"gerello/internal/adapters/secondary/postgres"
+	"gerello/internal/adapters/secondary/postgres/projects"
+	"gerello/internal/core/services"
 )
-
-// TODO: assembly the Project
 
 func main() {
 	ctx := context.Background()
@@ -25,4 +26,13 @@ func main() {
 		return
 	}
 	defer pg.Pool.Close()
+
+	projectsRepo := projects.New(pg.Pool)
+	projectsServices := services.New(projectsRepo)
+
+	err = api.New(*projectsServices, "8080").Run()
+	if err != nil {
+		log.Printf("%v", err)
+		return
+	}
 }

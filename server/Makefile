@@ -19,6 +19,7 @@ create-migration:
 docker:
 ifeq ($(cmd),up)
 	@docker compose up -d
+	@go run cmd/migrator/main.go
 else
 	@docker compose down
 endif

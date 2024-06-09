@@ -1,6 +1,7 @@
 package api
 
 import (
+	"log"
 	"net/http"
 
 	"gerello/internal/core/services"
@@ -25,6 +26,8 @@ func New(services services.ProjectService, port string) *RestServer {
 func (s *RestServer) Run() error {
 	mux := http.NewServeMux()
 	s.initRoutes(mux)
+
+	log.Printf("listen on http://localhost:%s\n", s.port)
 
 	return http.ListenAndServe(":"+s.port, mux)
 }
